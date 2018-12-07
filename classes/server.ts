@@ -32,11 +32,17 @@ export default class Server {
         console.log('<----- Escuchando conexiones - sockets ------->');
         // <----- Detectar conexión ------>
         this.io.on('connection', cliente => {
-            console.log('Cliente conectado');
-            // <---- Detectar desconexión ---->
+            // console.log('Cliente conectado');
+            // console.log(cliente.id);
+            // <-------- Conectar Cliente ----->
+            socket.conectarCliente(cliente);
+            // <------ Configurar Usuario ------>
+            socket.configurarUsuario( cliente, this.io );
+            // <------- Detectar desconexión ---->
             socket.desconectar( cliente );
             //  Mensajes
             socket.mensaje( cliente, this.io );
+
         });
     }
 
